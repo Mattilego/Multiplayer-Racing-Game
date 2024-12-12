@@ -55,7 +55,9 @@ const Items = {
             
             racer.setState("spun out", 40);
             item.delete = true;
-            updateItemData(item.id, { delete: true });
+            if (racer === racers[0]){
+                updateItemData(item.id, { delete: true });
+            }
         }
     },
     "homingMissile": {
@@ -168,7 +170,9 @@ const Items = {
             if (racer.id !== item.ownerId){
                 racer.setState("spun out", 80);
                 item.delete = true;
-                updateItemData(item.id, { delete: true }); 
+                if(racer === racers[0]){
+                    updateItemData(item.id, { delete: true });
+                }
             }
         }
     },
@@ -290,7 +294,9 @@ const Items = {
             if (item.duration > 0) return;
             racer.nitroCrystals += (racer.nitroCrystals < 10);
             item.duration = 400;
-            updateItemData(item.id, { duration: 400 });
+            if (racer === racers[0]){
+                updateItemData(item.id, { duration: 400 });
+            }
         }
     },
     "itemBox": {
@@ -332,7 +338,9 @@ const Items = {
                 racer.items.push(new Item(getRandomItem(placements[racers.indexOf(racer)], racer.items.map(item => item.type)), racer.position, null, null, 0, new Point(0, 0), 0));
             }
             item.duration = 100;
-            updateItemData(item.id, { duration: 100 });
+            if(racer === racers[0]){
+                updateItemData(item.id, { duration: 100 });
+            }
         }
     },
     "forceField": {
@@ -518,7 +526,9 @@ const Items = {
         collision: function(racer, item) {
             if (!item.state.detonated && racer.id !== item.ownerId) {
                 Items["EMP"].detonate(item);
-                updateItemData(item.id, { velocity: new Point(0, 0) });//Trigger detonation on server
+                if(racer === racers[0]){
+                    updateItemData(item.id, { velocity: new Point(0, 0) });//Trigger detonation on server
+                }
             }
         }
     },
@@ -702,7 +712,9 @@ const Items = {
             }
             racer.setState("spun out", 40);
             item.delete = true;
-            updateItemData(item.id, { delete: true });
+            if(racer === racers[0]) {
+                updateItemData(item.id, { delete: true });
+            }
         }
     },
     "mirrorControls": {
@@ -762,7 +774,9 @@ const Items = {
                 racer.controlsReversed = !racer.controlsReversed;
                 racer.controlsReversedTimer = 400;
                 item.delete = true;
-                updateItemData(item.id, { delete: true });
+                if(racer === racers[0]) {
+                    updateItemData(item.id, { delete: true });
+                }
             }
         }
     },

@@ -6,6 +6,7 @@ let gameRoom;
 let lastStateUpdate = 0;
 let serverTimeOffset = 0;
 let localRacerId = null; // Store our racer's ID
+let itemOverrideSupressions = [];
 
 // Track item and effect changes
 let lastItemState = null;
@@ -89,6 +90,15 @@ function initMultiplayer() {
                 }
             }
         });
+
+        itemOverrideSupressions.forEach(supression => {
+            if (gameState.items.find(item => item.id === supression)){
+                gameState.items = gameState.items.filter(item => item.id !== supression);
+            } else{
+                supression = null;
+            }
+        });
+        itemOverrideSupressions = itemOverrideSupressions.filter(supression => supression !== null);
 
         // Update items
         items = gameState.items.map(itemData => {
@@ -212,11 +222,8 @@ function useItem(item) {
 function updateItemData(itemId, dataToUpdate) {
     if (!socket || !gameRoom) return;
     
-    debug('Updating item data', { 
-        roomId: gameRoom,
-        itemId: itemId,
-        dataToUpdate: dataToUpdate
-    });
+    itemOverrideSupressions.push(itemId);
+
     socket.emit('itemUpdate', {
         roomId: gameRoom,
         itemId: itemId,
@@ -237,28 +244,4 @@ Racer.prototype.useItem = function() {
         }
     }
 };
-
-
-
-// Helper to get constructor parameters based on class type
-function getConstructorParams(data, ClassConstructor) {
-    switch(ClassConstructor) {
-        case Item:
-            return [
-                data.type || "bananaPeel",
-                data.position ? new Point(data.position.x, data.position.y) : new Point(),
-                data.target,
-                data.owner,
-                data.duration || 240,
-                data.velocity ? new Point(data.velocity.x, data.velocity.y) : new Point(),
-                data.direction || 0
-            ];
-        case Racer:
-            return []; // Racer constructor doesn't take parameters
-        case Point:
-            return [data.x || 0, data.y || 0];
-        default:
-            return [];
-    }
-}
 }
