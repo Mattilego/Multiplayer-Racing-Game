@@ -223,6 +223,9 @@ function updateItemData(itemId, dataToUpdate) {
     if (!socket || !gameRoom) return;
     
     itemOverrideSupressions.push(itemId);
+    setTimeout((id) => {
+        itemOverrideSupressions = itemOverrideSupressions.filter(supression => supression !== id); 
+    }, updateDelay*4, itemId);
 
     socket.emit('itemUpdate', {
         roomId: gameRoom,
