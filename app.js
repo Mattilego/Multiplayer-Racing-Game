@@ -330,11 +330,17 @@ io.on('connection', (socket) => {
         newItem.id = data.item.id;
         room.gameContext.items.push(newItem);
     });
-    socket.on("itemRemove", (data) => {
+    socket.on('itemUpdate', (data) => {
         const room = gameRooms.get(data.roomId);
         if (!room || !room.gameContext.racers.has(socket.id)) return;
-        room.gameContext.items = room.gameContext.items.filter(item => (item.id != data.itemId));
-    })
+        debug('Item update', { 
+            roomId: data.roomId, 
+            playerId: socket.id,
+            itemId: data.itemId,
+            dataToUpdate: data.dataToUpdate
+        });
+        Object.assign(room.gameContext.items.find(item => item.id === data.itemId), data.dataToUpdate);
+    });
 
     // Handle disconnection
     socket.on('disconnect', () => {
@@ -398,7 +404,8 @@ setInterval(() => {
                     collisionRadius: item.collisionRadius,
                     ownerId: item.ownerId,
                     target: item.target,
-                    state: item.state  // Add state to serialized item
+                    state: item.state, 
+                    id: item.id
                 });
             } 
             // Send game state to all players

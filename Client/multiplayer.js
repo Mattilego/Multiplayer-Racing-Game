@@ -209,6 +209,20 @@ function useItem(item) {
         item: item
     });
 }
+function updateItemData(itemId, dataToUpdate) {
+    if (!socket || !gameRoom) return;
+    
+    debug('Updating item data', { 
+        roomId: gameRoom,
+        itemId: itemId,
+        dataToUpdate: dataToUpdate
+    });
+    socket.emit('itemUpdate', {
+        roomId: gameRoom,
+        itemId: itemId,
+        dataToUpdate: dataToUpdate
+    });
+}
 
 // Monkey patch Racer's useItem method to sync with server
 const originalUseItem = Racer.prototype.useItem;
@@ -224,36 +238,7 @@ Racer.prototype.useItem = function() {
     }
 };
 
-// Function to restore item functions
-function restoreItemFunctions(item) {
-    if (!item || !item.type || !Items[item.type]) return item;
-    
-    item.update = Items[item.type].update;
-    item.draw = Items[item.type].draw;
-    item.collisionRadius = Items[item.type].collisionRadius;
-    item.collision = Items[item.type].collision;
-    item.use = Items[item.type].use;
-    
-    return item;
-}
 
-// Reinitialize a class instance with data while preserving class methods
-function reinitializeInstance(data, ClassConstructor) {
-    if (!data || !ClassConstructor) return data;
-    
-    // Create new instance with constructor properties
-    const constructorParams = getConstructorParams(data, ClassConstructor);
-    const instance = new ClassConstructor(...constructorParams);
-    
-    // Copy over any additional properties not handled by constructor
-    Object.keys(data).forEach(key => {
-        if (key !== 'constructor' && !Object.hasOwn(instance, key)) {
-            instance[key] = data[key];
-        }
-    });
-    
-    return instance;
-}
 
 // Helper to get constructor parameters based on class type
 function getConstructorParams(data, ClassConstructor) {
