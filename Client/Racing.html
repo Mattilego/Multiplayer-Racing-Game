@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<head>
+    <title>Simple racer</title>
+</head>
+<body>
+    <canvas width="500px" height="500px" class = "canvas" style = "border:5px solid black">
+    </canvas>
+    <!--Import classes and data in dependency order-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="classes/ShapesClasses.js"></script>
+    <script src="data/Items.js"></script>
+    <script src="data/ItemDistributions.js"></script>
+    <script src="classes/RacerClass.js"></script>
+    <script src="classes/ItemClass.js"></script>
+    <script src="classes/itemBoxClass.js"></script>
+    <script src="classes/TrackClass.js"></script>
+    <script src="data/CarStats.js"></script>
+    <script src="data/Tracks.js"></script>
+    <script src="data/StateChanges.js"></script>
+
+    <!--Import functions-->
+    <script src="functions/controls.js"></script>
+    <script src="functions/initCanvas.js"></script>
+    <script src="functions/rendering.js"></script>
+    <script src="functions/update.js"></script>
+    <script src="functions/general.js"></script>
+    <script src="functions/load.js"></script>
+    <script src="misc/InitVars.js"></script>
+    <script src="functions/randomItem.js"></script>
+    <script src="functions/UI.js"></script>
+    <script src="multiplayer.js"></script>
+    
+    <script>
+        loadTrack(tracks[trackNr-1]);
+        let raceloop = setInterval(raceLoop, 1000/60);
+        function raceLoop(){
+            update();
+            render(tracks[trackNr - 1], racers, items, itemBoxes);
+            if(typeof updateMultiplayer === 'function'){
+                updateMultiplayer(); // Update multiplayer state
+            }
+        }
+    </script>
+</body>

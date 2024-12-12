@@ -1,0 +1,15 @@
+{
+  "name": "racing-game",
+  "version": "1.0.0",
+  "description": "Multiplayer Racing Game",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  },
+  "engines": {"node": "16.x"}
+}
