@@ -94,6 +94,7 @@ function initMultiplayer() {
         itemOverrideSupressions.forEach(supression => {
             if (gameState.items.find(item => item.id === supression)){
                 gameState.items = gameState.items.filter(item => item.id !== supression);
+                gameState.items.push(items.find(item => item.id === supression));
             } else{
                 supression = null;
             }
