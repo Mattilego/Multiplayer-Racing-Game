@@ -269,8 +269,8 @@ io.on('connection', (socket) => {
     const newRacer = {
         id: socket.id,
         isPlayer: true,
-        position: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size - 1].position,
-        angle: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size - 1].angle,
+        position: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size].position,
+        angle: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size].angle,
         speed: 0,
         items: [],
         effects: [],
