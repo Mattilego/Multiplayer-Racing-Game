@@ -51,10 +51,6 @@ const baseGameContext = {
     placements: [], // Room-specific placements array
     racers: new Map(), // Room-specific racers map
     distance: distance, // Add distance function
-    loadTrack: function(track) {
-        this.trackNr = this.tracks.indexOf(track) + 1;
-        debug('Loading track', { trackName: track.name, trackNumber: this.trackNr });
-    }
 };
 
 // Create the context and set up self-reference
@@ -140,7 +136,7 @@ function createRoomGameContext() {
         // Override loadTrack to handle room-specific items
         loadTrack: function(track) {
             // Call base loadTrack to update trackNr
-            baseGameContext.loadTrack.call(this, track);
+            this.trackNr = this.tracks.indexOf(track) + 1;
             
             this.items = []; // Clear existing items
             this.placements = []; // Clear existing placements
@@ -172,6 +168,13 @@ function createRoomGameContext() {
                 );
                 this.items.push(item);
             });
+            
+            let racerNr = 0;
+            this.racers.forEach((id, racer) => {
+                this.racers.set(id, track.racers[racerNr]);
+                racerNr++;
+            }
+            )
             
             debug('Track loaded', { 
                 itemCount: this.items.length,

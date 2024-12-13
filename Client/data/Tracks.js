@@ -278,6 +278,14 @@ tracks.push(new Track(
         new Item("nitroCrystal", new Point(0, 0), null, null, 0)
     ],
     [
-        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(100, 100), Math.PI/2, true)
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(441, 225), Math.PI/2, true),
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(431, 220), Math.PI/2, false),
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(421, 215), Math.PI/2, false),
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(441, 210), Math.PI/2, false),
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(431, 205), Math.PI/2, false),
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(421, 200), Math.PI/2, false),
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(441, 195), Math.PI/2, false),
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(431, 190), Math.PI/2, false),
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(421, 185), Math.PI/2, false), 
     ]
 ));
