@@ -185,27 +185,69 @@ tracks.push(new Track(
     // checkpoints
     [
         new GeneralPath([
-          new Point(100, 150),
-          new Point(150, 150),
-          new Point(150, 200),
-          new Point(100, 200),
-          new Point(100, 150)
-        ]), // checkpoint 1
+            new Point(370, 235.5),
+            new Point(370, 238.5),
+            new Point(500, 238.5),
+            new Point(500, 235.5),
+            new Point(370, 235.5)
+        ]),
         new GeneralPath([
-          new Point(250, 200),
-          new Point(300, 200),
-          new Point(300, 250),
-          new Point(250, 250),
-          new Point(250, 200)
-        ]), // checkpoint 2
+            new Point(370, 238.5),
+            new Point(500, 238.5),
+            new Point(500, 500),
+            new Point(370, 500),
+            new Point(370, 238.5)
+        ]),
         new GeneralPath([
-          new Point(400, 250),
-          new Point(450, 250),
-          new Point(450, 300),
-          new Point(400, 300),
-          new Point(400, 250)
-        ]), // checkpoint 3
-      ],
+            new Point(370, 238.5),
+            new Point(370, 500),
+            new Point(130, 500),
+            new Point(130, 238.5),
+            new Point(370, 238.5)
+        ]),
+        new GeneralPath([
+            new Point(130, 250),
+            new Point(130, 500),
+            new Point(0, 500),
+            new Point(0, 250),
+            new Point(130, 250)
+        ]),
+        new GeneralPath([
+            new Point(130, 250),
+            new Point(0, 250),
+            new Point(0, 100),
+            new Point(130, 100),
+            new Point(130, 250)
+        ]),
+        new GeneralPath([
+            new Point(0, 0),
+            new Point(0, 100),
+            new Point(130, 100),
+            new Point(130, 0),
+            new Point(0, 0)
+        ]),
+        new GeneralPath([
+            new Point(130, 0),
+            new Point(130, 200),
+            new Point(370, 200),
+            new Point(370, 0),
+            new Point(130, 0)
+        ]),
+        new GeneralPath([
+            new Point(370, 0),
+            new Point(370, 200),
+            new Point(500, 200),
+            new Point(500, 0),
+            new Point(370, 0)
+        ]),
+        new GeneralPath([
+            new Point(500, 200),
+            new Point(500, 235.5),
+            new Point(370, 235.5),
+            new Point(370, 200),
+            new Point(500, 200)
+        ])
+    ],
     // Item boxes
     [
         new ItemBox(new Point(56, 175)), // item box 1 on straight 1

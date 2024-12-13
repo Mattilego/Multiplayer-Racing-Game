@@ -16,7 +16,7 @@ function drawUI(p){
     
     // Precompute common values
     const boostThreshold = displayTopSpeed * 1.1;
-    const placement = placements.indexOf(0) + 1;
+    const placement = placements.indexOf(racers[0].id) + 1;
     
     // Cached colors and styles
     const bgColor = "rgba(0, 0, 0, 0.5)";

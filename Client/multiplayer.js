@@ -221,7 +221,7 @@ function useItem(item) {
     });
 }
 function updateItemData(itemId, dataToUpdate) {
-    if (!socket || !gameRoom) return;
+    if (!socket || !gameRoom || typeof updateDelay === "undefined") return;
     
     itemOverrideSupressions.push(itemId);
     setTimeout((id) => {
@@ -248,4 +248,7 @@ Racer.prototype.useItem = function() {
         }
     }
 };
+}else{
+    console.log("Multiplayer not enabled");
+    updateItemData = () => {};
 }

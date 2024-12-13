@@ -12,7 +12,7 @@ const Items = {
             ], "#FF4444", "#CC0000", 2)
         ]),
         use: function(racer) {
-            racer.itemBoostDuration = 30;
+            racer.itemBoostDuration = 60;
         }
     },
     "bananaPeel": {
@@ -109,7 +109,7 @@ const Items = {
         },
         collisionRadius: 8,
         use: function(racer) {
-            items.push(new Item("homingMissile", new Point(racer.position.x, racer.position.y), racers[placements[(placements.indexOf(racers.indexOf(racer)) - 1)%racers.length]].id, racer.id, 300, new Point(30*Math.cos(racer.angle), 30*Math.sin(racer.angle)), racer.angle));
+            items.push(new Item("homingMissile", new Point(racer.position.x, racer.position.y), racers.find(r => r.id === placements[(placements.indexOf(racer.id) - 1)%racers.length +0/* To convert -0 to 0 */]).id, racer.id, 300, new Point(30*Math.cos(racer.angle), 30*Math.sin(racer.angle)), racer.angle));
         },
         update: function(item) {
             // Delete if duration expires
@@ -335,7 +335,7 @@ const Items = {
         collision: function(racer, item) {
             if (item.duration > 0) return;
             if (racer.items.length < 3){
-                racer.items.push(new Item(getRandomItem(placements[racers.indexOf(racer)], racer.items.map(item => item.type)), racer.position, null, null, 0, new Point(0, 0), 0));
+                racer.items.push(new Item(getRandomItem(placements[racer.id], racer.items.map(item => item.type)), racer.position, null, null, 0, new Point(0, 0), 0));
             }
             item.duration = 100;
             if(racer === racers[0]){
@@ -673,7 +673,7 @@ const Items = {
         position: new Point(),
         use: function(racer) {
             this.position = new Point(racer.position.x, racer.position.y);
-            items.push(new Item("fakePowerup", new Point(racer.position.x, racer.position.y), null, racer.id, 30, new Point(0, 0), 0));
+            items.push(new Item("fakePowerup", new Point(racer.position.x, racer.position.y), null, racer.id, 600, new Point(0, 0), 0));
         },
         draw: function(p, item) {
             let t = new Date();

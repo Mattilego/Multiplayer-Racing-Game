@@ -140,7 +140,6 @@ class Racer {
             const t = new Date().getTime() / 1000;
             p.save();
             p.translate(this.position.x, this.position.y);
-            p.rotate(this.angle);
             
             // Create pulsing forcefield effect
             const baseRadius = this.collisionRadius * 1.5;
@@ -220,6 +219,7 @@ class Racer {
         this.handleWalls(tracks[trackNr - 1]);
         this.updatePosition();
         this.updateState();
+        this.updateCheckpoints();
         this.resetActions();
     }
 
@@ -596,6 +596,21 @@ class Racer {
             t = this.isAccelerating;
             this.isAccelerating = this.isDecelerating;
             this.isDecelerating = t;
+        }
+    }
+
+    updateCheckpoints(){
+        p.beginPath();
+        tracks[trackNr - 1].checkpoints[this.checkpoints].path(p);
+        if (p.isPointInPath(this.position.x - racers[0].position.x + canvas.width / 2, this.position.y - racers[0].position.y + canvas.height / 2)) {
+            this.checkpoints++;
+            if (this.checkpoints >= tracks[trackNr - 1].checkpoints.length) {
+                this.checkpoints = 0;//Finished lap
+                this.currentLap++;
+                if (this.currentLap >= tracks[trackNr - 1].laps) {
+                    //Finished race
+                }
+            }
         }
     }
 }

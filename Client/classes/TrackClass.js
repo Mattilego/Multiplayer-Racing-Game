@@ -10,13 +10,13 @@
  * @param {Shape} slipperyRoad - The shape defining slippery road areas.
  * @param {GeneralPath} path - The path defining the racing line.
  * @param {number} laps - The number of laps required to complete the track.
- * @param {GeneralPath[]} cps - The array of checkpoint paths.
+ * @param {GeneralPath[]} checkpoints - The array of checkpoint paths.
  * @param {ItemBox[]} itemBoxes - The array of item boxes on the track.
  * @param {Item[]} items - The array of items (like nitro crystals) on the track.
  * @param {Racer[]} racers - The array of racers participating on the track.
  */
 class Track{
-    constructor(visual = new shape(), background = "gray", scale = 1, offroad = new shape(), walls = new shape(), boostPanels = new shape(), slipperyRoad = new shape(), path = new generalPath([new point(), new point()]), laps = 3, cps = [new generalPath()], itemBoxes = [], items = [], racers = []){
+    constructor(visual = new shape(), background = "gray", scale = 1, offroad = new shape(), walls = new shape(), boostPanels = new shape(), slipperyRoad = new shape(), path = new generalPath([new point(), new point()]), laps = 3, checkpoints = [new generalPath()], itemBoxes = [], items = [], racers = []){
         this.visual = visual;
         this.background = background;
         this.scale = scale;
@@ -26,7 +26,7 @@ class Track{
         this.slipperyRoad = slipperyRoad;
         this.path = path;
         this.laps = laps;
-        this.cps = cps;
+        this.checkpoints = checkpoints;
         this.itemBoxes = itemBoxes;
         this.items = items;
         this.racers = racers;

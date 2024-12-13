@@ -16,5 +16,8 @@ function update(){
     itemBoxes.forEach(function(itemBox){
         Items[itemBox.type].update(item);
     });
-    items = items.filter(function(item){return !item.delete;})
+    items = items.filter(function(item){return !item.delete;});
+    //Update placements
+    let racersSorted = [...racers].sort((a, b) => (a.currentLap === b.currentLap)? a.checkpoints - b.checkpoints: a.currentLap - b.currentLap);
+    placements = racersSorted.map(racer => racer.id);
 }
