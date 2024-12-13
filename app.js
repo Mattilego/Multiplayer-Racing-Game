@@ -269,7 +269,7 @@ io.on('connection', (socket) => {
     const newRacer = {
         id: socket.id,
         isPlayer: true,
-        position: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size].position,
+        position: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size].position.copy(),
         angle: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size].angle,
         speed: 0,
         items: [],
@@ -278,6 +278,7 @@ io.on('connection', (socket) => {
         drifting: false,
         driftAngle: 0
     };
+
     newRacer.position.scale(room.gameContext.tracks[room.gameContext.trackNr-1].scale);
     
     room.gameContext.racers.set(socket.id, newRacer);
