@@ -679,7 +679,7 @@ const Items = {
             let t = new Date();
             t = t.getTime()/1000;
             position = new Point(item.position.x, item.position.y + 5*Math.sin(t*Math.PI));
-            const size = (item.duration * (item.duration < 0) - item.duration + 40 + item.duration * (item.duration > 40))*(item.duration < 40)/3;
+            const size = 40/3;
             const g = p.createLinearGradient(position.x - size, position.y - size, position.x + size, position.y + size);
             g.addColorStop(0, `hsla(${200+40*Math.sin(t*4)}, 100%, 80%, 0.5)`);
             g.addColorStop(0.4, `hsla(${200+40*Math.sin(t*4+Math.PI/2)}, 100%, 80%, 0.5)`);
