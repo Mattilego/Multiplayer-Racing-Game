@@ -1,4 +1,4 @@
-[Click here to play it.](https://acute-juicy-knife.glitch.me/)
+[Click here to play it.](https://simple-multiplayer-racing.glitch.me/)
 
 A simple top-down view racing game with online multiplayer.
 
