@@ -18,6 +18,6 @@ function update(){
     });
     items = items.filter(function(item){return !item.delete;});
     //Update placements
-    let racersSorted = [...racers].sort((a, b) => (a.currentLap === b.currentLap)? a.checkpoints - b.checkpoints: a.currentLap - b.currentLap);
+    let racersSorted = [...racers].sort((a, b) => (a.currentLap === b.currentLap)? b.checkpoints - a.checkpoints: b.currentLap - a.currentLap);
     placements = racersSorted.map(racer => racer.id);
 }
