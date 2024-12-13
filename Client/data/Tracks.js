@@ -283,9 +283,6 @@ tracks.push(new Track(
         new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(421, 215), Math.PI/2, false),
         new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(441, 210), Math.PI/2, false),
         new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(431, 205), Math.PI/2, false),
-        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(421, 200), Math.PI/2, false),
-        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(441, 195), Math.PI/2, false),
-        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(431, 190), Math.PI/2, false),
-        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(421, 185), Math.PI/2, false), 
+        new Racer(10, -5, 0.04, 0.1, 30, 20, new Shape(), new Point(421, 200), Math.PI/2, false)
     ]
 ));

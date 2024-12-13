@@ -673,7 +673,7 @@ const Items = {
         position: new Point(),
         use: function(racer) {
             this.position = new Point(racer.position.x, racer.position.y);
-            items.push(new Item("fakePowerup", new Point(racer.position.x, racer.position.y), null, racer.id, 600, new Point(0, 0), 0));
+            items.push(new Item("fakePowerup", new Point(racer.position.x, racer.position.y), null, racer.id, 1200, new Point(0, 0), 0));
         },
         draw: function(p, item) {
             let t = new Date();
@@ -800,7 +800,7 @@ const Items = {
             ], "#87CEEB", "#B0E0E6", 2)
         ]),
         use: function(racer) {
-            items.push(new Item("tailwind", new Point(0, 0), null, racer.id, 300, new Point(0, 0), racer.angle));
+            items.push(new Item("tailwind", new Point(0, 0), null, racer.id, 600, new Point(0, 0), racer.angle));
         },
         draw: function(p, item) {
             // Draw wind effect directly on screen
