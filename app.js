@@ -274,7 +274,7 @@ io.on('connection', (socket) => {
         speed: 0,
         items: [],
         effects: [],
-        currentLap: 0,
+        currentLap: 1,
         drifting: false,
         driftAngle: 0
     };

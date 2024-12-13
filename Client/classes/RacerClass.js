@@ -607,7 +607,7 @@ class Racer {
             if (this.checkpoints >= tracks[trackNr - 1].checkpoints.length) {
                 this.checkpoints = 0;//Finished lap
                 this.currentLap++;
-                if (this.currentLap >= tracks[trackNr - 1].laps) {
+                if (this.currentLap > tracks[trackNr - 1].laps) {
                     //Finished race
                 }
             }
