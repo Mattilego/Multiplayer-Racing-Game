@@ -269,8 +269,8 @@ io.on('connection', (socket) => {
     const newRacer = {
         id: socket.id,
         isPlayer: true,
-        position: { x: 0, y: 0 },
-        angle: 0,
+        position: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size - 1].position,
+        angle: room.gameContext.tracks[room.gameContext.trackNr-1].racers[room.gameContext.racers.size - 1].angle,
         speed: 0,
         items: [],
         effects: [],
@@ -278,6 +278,7 @@ io.on('connection', (socket) => {
         drifting: false,
         driftAngle: 0
     };
+    newRacer.position.scale(room.gameContext.tracks[room.gameContext.trackNr-1].scale);
     
     room.gameContext.racers.set(socket.id, newRacer);
     debug('Player joined room', { 
@@ -394,7 +395,7 @@ setInterval(() => {
                     empTimer: racer.empTimer,
                     state: racer.state,
                     collisionRadius: racer.collisionRadius,
-                    nitroCrystals: racer.nitroCrystals,
+                    nitroCrystals: racer.nitroCrystals
                 });
             }
             for (const item of room.gameContext.items){

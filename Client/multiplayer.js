@@ -4,13 +4,11 @@ let socket;
 let clientId;
 let gameRoom;
 let lastStateUpdate = 0;
-let serverTimeOffset = 0;
 let localRacerId = null; // Store our racer's ID
 let itemOverrideSupressions = [];
 
 // Track item and effect changes
 let lastItemState = null;
-let lastEffectState = null;
 
 // Debug logging
 function debug(event, data) {
@@ -56,11 +54,10 @@ function initMultiplayer() {
         // Update timestamp
         updateDelay = Date.now() - lastStateUpdate;
         lastStateUpdate = Date.now();
-        serverTimeOffset = lastStateUpdate - gameState.timestamp;
 
         // Update or create non-local racers
         gameState.racers.forEach(racerData => {
-            if (racerData.id !== localRacerId) {
+            if (racerData.id !== localRacerId || updateDelay > 10000) {
                 let racer = racers.find(r => r.id === racerData.id);
                 if (!racer) {
                     // Create new racer
