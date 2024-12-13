@@ -69,9 +69,9 @@ function drawUI(p){
     // Background for speedometer
     p.fillStyle = bgColor;
     p.fillRect(
-        speedX - 90, 
+        speedX - 120, 
         speedY - 30,
-        160,
+        190,
         65
     );
     

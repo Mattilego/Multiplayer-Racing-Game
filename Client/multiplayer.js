@@ -194,7 +194,9 @@ function updateMultiplayer() {
         isEMPed: localRacer.isEMPed,
         forcefieldTimer: localRacer.forceFieldTimer,
         empTimer: localRacer.empTimer,
-        state: localRacer.state
+        state: localRacer.state,
+        checkpoints: localRacer.checkpoints,
+        currentLap: localRacer.currentLap
     };
 
     // Only send items if they've changed
