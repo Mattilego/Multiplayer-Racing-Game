@@ -370,7 +370,7 @@ const Items = {
             new Arc(new Point(0, 0), 15, 0, 2 * Math.PI, false, "#98FB98", "#228B22", 2)
         ]),
         use: function(racer) {
-            const empItem = new Item("EMP", racer.position.copy(), null, racer.id, undefined, new Point((20+racer.speed)*Math.cos(racer.direction), (20+racer.speed)*Math.sin(racer.direction)), racer.angle);
+            const empItem = new Item("EMP", racer.position.copy(), null, racer.id, -1, new Point((20+racer.speed)*Math.cos(racer.angle), (20+racer.speed)*Math.sin(racer.angle)), racer.angle);
             empItem.state = {detonated: false, detonationTimer: 0, blastRadius: 200};
             
             // Precalculate lightning arc points for better performance
