@@ -147,6 +147,7 @@ function useItem() {
 
 document.addEventListener('touchstart', handleTouchDown, false);
 document.addEventListener('touchmove', handleTouch, false);
+document.addEventListener('touchend', handleTouch, false);
 
 function handleTouchDown(event) {
     pressControls.filter((value, key) => typeof key === "object").forEach((value, key) => {
