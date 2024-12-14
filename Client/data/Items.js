@@ -109,7 +109,7 @@ const Items = {
         },
         collisionRadius: 8,
         use: function(racer) {
-            items.push(new Item("homingMissile", new Point(racer.position.x, racer.position.y), racers.find(r => r.id === placements[(placements.indexOf(racer.id) - 1)%racers.length +0/* To convert -0 to 0 */]).id, racer.id, 300, new Point(30*Math.cos(racer.angle), 30*Math.sin(racer.angle)), racer.angle));
+            items.push(new Item("homingMissile", new Point(racer.position.x, racer.position.y), racers.find(r => r.id === placements[((placements.indexOf(racer.id) - 1+racers.length)%racers.length)]).id, racer.id, 300, new Point(30*Math.cos(racer.angle), 30*Math.sin(racer.angle)), racer.angle));
         },
         update: function(item) {
             // Delete if duration expires
