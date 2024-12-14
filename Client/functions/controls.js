@@ -151,7 +151,7 @@ document.addEventListener('touchend', handleTouch, false);
 
 function handleTouchDown(event) {
     pressControls.filter((value, key) => typeof key === "object").forEach((value, key) => {
-        if (isTouchInsideBoundingBox(event.x, event.y, key)) {
+        if (isTouchInsideBoundingBox(event.touches[0].clientX, event.touches[0].clientY, key)) {
             value();
         }
     });
