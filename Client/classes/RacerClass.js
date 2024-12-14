@@ -78,6 +78,7 @@ class Racer {
         this.checkpoints = 0;
         this.controlsReversed = false;
         this.cotrolsReversedTimer = 0; // Timer for controls reversion
+        this.finished = false;
 
         // State machine
         this.state = "normal";
@@ -609,6 +610,7 @@ class Racer {
                 this.currentLap++;
                 if (this.currentLap > tracks[trackNr - 1].laps) {
                     //Finished race
+                    this.finished = true;
                 }
             }
         }

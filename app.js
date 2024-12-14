@@ -276,7 +276,8 @@ io.on('connection', (socket) => {
         effects: [],
         currentLap: 1,
         drifting: false,
-        driftAngle: 0
+        driftAngle: 0,
+        finished: false
     };
 
     newRacer.position.scale(room.gameContext.tracks[room.gameContext.trackNr-1].scale);
@@ -396,7 +397,8 @@ setInterval(() => {
                     empTimer: racer.empTimer,
                     state: racer.state,
                     collisionRadius: racer.collisionRadius,
-                    nitroCrystals: racer.nitroCrystals
+                    nitroCrystals: racer.nitroCrystals,
+                    finished: racer.finished
                 });
             }
             for (const item of room.gameContext.items){

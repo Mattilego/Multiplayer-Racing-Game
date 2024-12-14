@@ -73,6 +73,7 @@ function initMultiplayer() {
                     racer.isEMPed = racerData.isEMPed;
                     racer.forceFieldTimer = racerData.forceFieldTimer;
                     racer.empTimer = racerData.empTimer;
+                    racer.finished = racerData.finished;
                     racers.push(racer);
                 } else {
                     // Update existing racer
@@ -196,7 +197,8 @@ function updateMultiplayer() {
         empTimer: localRacer.empTimer,
         state: localRacer.state,
         checkpoints: localRacer.checkpoints,
-        currentLap: localRacer.currentLap
+        currentLap: localRacer.currentLap,
+        finished: localRacer.finished
     };
 
     // Only send items if they've changed
