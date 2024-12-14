@@ -154,6 +154,7 @@ function handleTouchDown(event) {
             value();
         }
     });
+    handleTouch(event);
 }
 
 function handleTouch(event) {
