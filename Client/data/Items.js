@@ -814,7 +814,7 @@ const Items = {
             // Initialize particles in item if not exists
             if (!item.particles) {
                 // Create wind particles
-                const particleCount = Math.max(100, Math.floor(canvas.width * canvas.height / 2000));
+                const particleCount = Math.floor(canvas.width * canvas.height / 6000);
                 item.particles = Array.from({length: particleCount}, () => ({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
