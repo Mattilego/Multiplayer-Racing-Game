@@ -250,8 +250,18 @@ function findOrCreateRoom(socket) {
 // Serve static files from Client directory
 app.use(express.static(path.join(__dirname, 'Client')));
 
-// Root route
-app.get('/', (req, res) => {
+// Import express-rate-limit
+const rateLimit = require('express-rate-limit');
+
+// Create a rate limit middleware
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per windowMs
+    message: 'Too many requests, please try again later.'
+});
+
+// Apply the rate limit middleware to the root route
+app.get('/', limiter, (req, res) => {
     res.sendFile(path.join(__dirname, 'Client', 'Racing.html'));
 });
 
