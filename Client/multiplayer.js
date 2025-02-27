@@ -26,7 +26,8 @@ function initMultiplayer() {
     });
 
     // Handle game state updates
-    socket.on('gameStateUpdate', (gameState) => {
+    socket.on('gameStateUpdate', setGameState);
+    function setGameState(gameState) {
         // Initialize local racer ID if not set
         if (!localRacerId) {
             const localRacerData = gameState.racers.find(r => r.id === clientId);
@@ -139,7 +140,7 @@ function initMultiplayer() {
                 position: localRacer.position
             });
         }
-    });
+    }
 
     // Handle game start
     socket.on('gameStart', (racers) => {
@@ -165,6 +166,23 @@ function initMultiplayer() {
                 playerId,
                 remainingPlayers: racers.length 
             });
+        }
+    });
+
+    socket.on('replay', (replayStates) => {
+        debug('Replay received', { 
+            replayStates: replayStates.length
+        });
+        replay = replayStates;
+        clearInterval(raceloop);
+        clearInter
+        setTimeout(renderGameState, 0,0);
+        function renderGameState(frame) {
+            setGameState(replay[frame].gameState);
+            render(tracks[trackNr - 1], racers, items, itemBoxes);
+            if (frame < replay.length - 1) {
+                setTimeout(renderGameState, replay[frame+1].time-replay[frame].time, frame+1);
+            }
         }
     });
 }

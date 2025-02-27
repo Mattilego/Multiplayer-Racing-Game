@@ -190,10 +190,16 @@ function createRoomGameContext() {
 function createGameRoom(roomId) {
     const room = {
         id: roomId,
+        clientUpdates: [],
         gameStarted: false,
         lastUpdate: Date.now(),
+        replayStates: [],
         gameContext: createRoomGameContext(),
         update: function(){
+            this.clientUpdates.forEach(update => {
+                update.function(update.args);
+            })
+            this.clientUpdates = [];
             this.gameContext.items.forEach(function(item){
                 baseGameContext.Items[item.type].update(item);
             });
@@ -321,11 +327,21 @@ io.on('connection', (socket) => {
     socket.on('playerUpdate', (data) => {
         const room = gameRooms.get(data.roomId);
         if (!room || !room.gameContext.racers.has(socket.id)) return;
-
-        // Update racer state
-        const racer = room.gameContext.racers.get(socket.id);
-        Object.assign(racer, data);
-        room.lastUpdate = Date.now();
+        room.clientUpdates.push({
+            function: function(args){
+                // Update racer state
+                const racer = args.room.gameContext.racers.get(args.socketId);
+                Object.assign(racer, args.data);
+                if (racer.finished) {
+                    socket.emit('replay', args.room.replayStates);
+                }
+            },
+            args: {
+                room: room,
+                socketId: socket.id,
+                data: data
+            }
+        });
     });
 
     // Handle item events
@@ -333,29 +349,40 @@ io.on('connection', (socket) => {
         const room = gameRooms.get(data.roomId);
         if (!room || !room.gameContext.racers.has(socket.id)) return;
 
-        debug('Item event', { 
-            roomId: data.roomId, 
-            playerId: socket.id,
-            itemType: data.item.type,
-            itemPosition: data.item.position,
-            itemState: data.state,
-            ownerId: data.item.ownerId,
-            itemId: data.item.id
+        room.clientUpdates.push({
+            function: function(args){
+                const newItem = new args.room.gameContext.Item(
+                    args.data.item.type,
+                    new args.room.gameContext.Point(args.data.item.position.x, args.data.item.position.y),
+                    args.data.item.target,
+                    args.data.item.ownerId,
+                    args.data.item.duration,
+                    new args.room.gameContext.Point(args.data.item.velocity.x, args.data.item.velocity.y),
+                    args.data.item.direction,
+                    args.data.item.state
+                );
+                newItem.id = data.item.id;
+                room.gameContext.items.push(newItem);
+            },
+            args: {
+                room: room,
+                data: data
+            }
         });
-        const newItem = new room.gameContext.Item(data.item.type, new room.gameContext.Point(data.item.position.x, data.item.position.y), data.item.target, data.item.ownerId, data.item.duration, new room.gameContext.Point(data.item.velocity.x, data.item.velocity.y), data.item.direction, data.item.state);
-        newItem.id = data.item.id;
-        room.gameContext.items.push(newItem);
     });
     socket.on('itemUpdate', (data) => {
         const room = gameRooms.get(data.roomId);
         if (!room || !room.gameContext.racers.has(socket.id)) return;
-        debug('Item update', { 
-            roomId: data.roomId, 
-            playerId: socket.id,
-            itemId: data.itemId,
-            dataToUpdate: data.dataToUpdate
+        room.clientUpdates.push({
+            function: function(args){
+                const item = args.room.gameContext.items.find(item => item.id === args.data.itemId);
+                Object.assign(item, args.data.dataToUpdate);
+            },
+            args: {
+                room: room,
+                data: data
+            }
         });
-        Object.assign(room.gameContext.items.find(item => item.id === data.itemId), data.dataToUpdate);
     });
 
     // Handle disconnection
@@ -427,6 +454,7 @@ setInterval(() => {
             } 
             // Send game state to all players
             io.to(roomId).emit('gameStateUpdate', gameState);
+            room.replayStates.push({ time: now, gameState: gameState });
         }
     });
 }, 1000/10); // 10 times per second
