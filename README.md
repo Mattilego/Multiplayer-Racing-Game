@@ -1,3 +1,5 @@
+WARNING: This is abandoned and has bugs and bad code
+
 [Click here to play it.](https://simple-multiplayer-racing.glitch.me/)
 
 A simple top-down view racing game with online multiplayer.
